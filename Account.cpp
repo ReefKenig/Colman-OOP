@@ -33,7 +33,27 @@ Account::Account(const Person& person, double balance) : m_balance(balance) {
 }
 
 // Copy Constructor
-Account::Account(const Account& other) { *this = other; }
+Account::Account(const Account& other) {
+	if (&other != this) {
+		clearTransactions();
+		clearPersons();
+		
+		this->m_balance = other.m_balance;
+		this->m_numberOfTransaction = other.m_numberOfTransaction;
+		this->m_totalPersons = other.m_totalPersons;
+		this->m_accountNumber = other.m_accountNumber;
+
+		this->m_transactionList = new Transaction * [this->m_numberOfTransaction];
+		for (int i = 0; i < this->m_numberOfTransaction; i++) {
+			this->m_transactionList[i] = new Transaction(*other.m_transactionList[i]);
+		}
+
+		this->m_persons = new Person * [this->m_totalPersons];
+		for (int i = 0; i < this->m_totalPersons; i++) {
+			this->m_persons[i] = new Person(*other.m_persons[i]);
+		}
+	}
+}
 
 // Destructor
 Account::~Account() {
@@ -96,10 +116,21 @@ void Account::AddPerson(const Person& newPerson, double	amount) {
 	m_balance += amount;
 }
 
-void Account::DeletePerson(const Person& oldPerson) {}
+void Account::DeletePerson(const Person& oldPerson) {
+}
 
-void Account::AddTransaction(const Transaction& newTransaction) {} // TODO
+void Account::AddTransaction(const Transaction& newTransaction) {}
 
-void Account::clearPersons() {}
+void Account::clearPersons() {
+	for (int i = 0; i < m_totalPersons; ++i) {
+		delete m_persons[i];
+	}
+	delete[] m_persons;
+}
 
-void Account::clearTransactions() {} // TODO
+void Account::clearTransactions() {
+	for (int i = 0; i < m_numberOfTransaction; ++i) {
+		delete m_transactionList[i];
+	}
+	delete[] m_transactionList;
+}
