@@ -1,0 +1,19 @@
+Define the following classes:
+* Vampire
+  - (int) age
+  - (char*) name
+  - (int) number of offsprings
+  - (int) light sensitivity
+  - (Vampire**) offsprings: an array of all types of vampiers
+
+* Werewolf
+  - (int) age
+  - (char*) name
+  - (int) number of offsprings
+  - (int) hours being a werewolf
+  - (int) hours being human
+  - (Werewolf**) offsprings: an array of all types of werewolves
+
+* VampireWerewolf
+  - Has the properties of both
+  - Can have both vampires and werewolves as offsprings as well as hybrids
