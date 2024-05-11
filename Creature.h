@@ -1,3 +1,5 @@
+#ifndef CREATURE_H
+#define CREATURE_H
 #include <iostream>
 using namespace std;
 
@@ -9,23 +11,23 @@ protected:
 public:
 	// Constructors
 	Creature(): m_name(nullptr), m_age(0), m_numOfOffsprings(0) {}
-	Creature(char* name, int age, int numOfOffsprings):
-		m_name(strcpy(name, m_name)),
+	Creature(const char* name, int age, int numOfOffsprings):
 		m_age(age),
-		m_numOfOffsprings(numOfOffsprings) {}
-	Creature(Creature& c) {
-		strcpy(m_name, c.getName());
-		m_age = c.getAge();
-		m_numOfOffsprings = c.getNumOfOffsprings();
+		m_numOfOffsprings(numOfOffsprings) {
+		m_name = new char[strlen(name) + 1];
+		strcpy_s(m_name, strlen(name) + 1, name);
 	}
 
-	// Set methods
-	void setName(char* name) { strcpy(m_name, name); }
-	void setAge(int age) { m_age = age; }
-	void setNumOfOffsprings(int offsprings) { m_numOfOffsprings = offsprings; }
-
-	// Get methods
 	char* getName() { return m_name; }
 	int getAge() { return m_age; }
 	int getNumOfOffsprings() { return m_numOfOffsprings; }
+
+	virtual void printInfo() {
+		cout << "===Creature printInfo===" << endl << endl;
+		cout << "Name: " << getName() << endl;
+		cout << "Age: " << getAge() << endl;
+		cout << "Number of offsprings: " << getNumOfOffsprings() << endl;
+	}
 };
+
+#endif // !CREATURE_H
