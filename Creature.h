@@ -22,11 +22,19 @@ public:
 	int getAge() { return m_age; }
 	int getNumOfOffsprings() { return m_numOfOffsprings; }
 
-	virtual void printInfo() {
-		cout << "===Creature printInfo===" << endl << endl;
-		cout << "Name: " << getName() << endl;
-		cout << "Age: " << getAge() << endl;
-		cout << "Number of offsprings: " << getNumOfOffsprings() << endl;
+	void printCommonInfo() {
+		cout << "===Creature printInfo===" << endl;
+		cout << "Name: " << m_name << endl;
+		cout << "Age: " << m_age << endl;
+		cout << "Number of offsprings: " << m_numOfOffsprings << endl;
+	}
+
+	virtual void printSpecificInfo() = 0;
+
+	void printInfo() {
+		printCommonInfo();
+		printSpecificInfo();
+		cout << endl;
 	}
 };
 

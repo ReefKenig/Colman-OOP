@@ -16,8 +16,9 @@ public:
 		int werewolfHours,
 		int humanHours,
 		Creature** offsprings):
-		Vampire(name, age, numOfOffsprings, lightSensitivity, nullptr),
-		Werewolf(name, age, numOfOffsprings, werewolfHours, humanHours, nullptr) {
+		Creature(name, age, numOfOffsprings),
+		Vampire(name, age, 0, lightSensitivity, nullptr),
+		Werewolf(name, age, 0, werewolfHours, humanHours, nullptr) {
 		if (numOfOffsprings <= 0) { m_offsprings = nullptr; }
 		else {
 			m_offsprings = new Creature * [numOfOffsprings];
@@ -26,26 +27,25 @@ public:
 			}
 		}
 	}
-	
-	virtual void printInfo() {
-		Creature::printInfo();
-		// Vampire::printInfo();
-		// Werewolf::printInfo();
+
+	virtual void printSpecificInfo() override {
+		Vampire::printSpecificInfo();
+		Werewolf::printSpecificInfo();
 		cout << "===VampireWerewolf printInfo===" << endl;
-		// for (int i = 0; i < m_numOfOffsprings; i++) {
-		// 	cout << "- Offspring " << i + 1 << endl;
-		// 	cout << "Name: " << m_offsprings[i] << endl;
-		// 	cout << "Species: ";
-		// 	if (auto* VOffspring = dynamic_cast<Vampire*>(m_offsprings[i])) {
-		// 		cout << "Vampire" << endl;
-		// 	}
-		// 	else if (auto* WOffspring = dynamic_cast<Werewolf*>(m_offsprings[i])) {
-		// 		cout << "Werewolf" << endl;
-		// 	}
-		// 	else if (auto* VWOffspring = dynamic_cast<VampireWerewolf*>(m_offsprings[i])) {
-		// 		cout << "Vampire Werewolf" << endl;
-		// 	}
-		// }
+		for (int i = 0; i < m_numOfOffsprings; i++) {
+			cout << "- Offspring " << i + 1 << endl;
+			cout << "Name: " << m_offsprings[i]->getName() << endl;
+			cout << "Species: ";
+			if (auto* VOffspring = dynamic_cast<Vampire*>(m_offsprings[i])) {
+				cout << "Vampire" << endl;
+			}
+			else if (auto* WOffspring = dynamic_cast<Werewolf*>(m_offsprings[i])) {
+				cout << "Werewolf" << endl;
+			}
+			else if (auto* VWOffspring = dynamic_cast<VampireWerewolf*>(m_offsprings[i])) {
+				cout << "Vampire Werewolf" << endl;
+			}
+		}
 	}
 };
 

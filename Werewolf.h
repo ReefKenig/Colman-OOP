@@ -10,23 +10,27 @@ class Werewolf: public virtual Creature {
 public:
 	// Constructors
 	Werewolf() : m_werewolfHours(0), m_humanHours(0), m_offsprings(nullptr) {}
-	Werewolf(char* name, int age, int numOfOffsprings, int werewolfH, int humanH, Werewolf** offsprings) :
+	Werewolf(char* name, int age, int numOfOffsprings, int werewolfH, int humanH, Werewolf** offsprings):
 		Creature(name, age, numOfOffsprings),
 		m_werewolfHours(werewolfH),
 		m_humanHours(humanH) {
-		m_offsprings = new Werewolf * [numOfOffsprings];
-		for (int i = 0; i < numOfOffsprings; i++) {
-			m_offsprings[i] = offsprings[i];
+		if (numOfOffsprings <= 0) { m_offsprings = nullptr; }
+		else {
+			m_offsprings = new Werewolf * [numOfOffsprings];
+			for (int i = 0; i < numOfOffsprings; i++) {
+				m_offsprings[i] = offsprings[i];
+			}
 		}
 	}
 	
-	virtual void printInfo() {
-		Creature::printInfo();
-		cout << "===Werewolf printInfo===" << endl << endl;
+	virtual void printSpecificInfo() override {
+		cout << "===Werewolf printInfo===" << endl;
 		cout << "Werewolf hours: " << m_werewolfHours << endl;
 		cout << "Human hours: " << m_humanHours << endl;
-		for (int i = 0; i < m_numOfOffsprings; i++) {
-			cout << "- Offspring " << i + 1 << ": " << m_offsprings[i]->m_name << endl;
+		if (m_offsprings != nullptr) {
+			for (int i = 0; i < m_numOfOffsprings; i++) {
+				cout << "- Offspring " << i + 1 << ": " << m_offsprings[i]->m_name << endl;
+			}
 		}
 	}
 };

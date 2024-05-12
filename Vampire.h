@@ -35,12 +35,13 @@ public:
 	// 	delete[] m_offsprings;
 	// }
 
-	virtual void printInfo() {
-		Creature::printInfo();
-		cout << "===Vampire printInfo===" << endl << endl;
+	virtual void printSpecificInfo() override {
+		cout << "===Vampire printInfo===" << endl;
 		cout << "Light sensitivity: " << m_lightSensitivity << endl;
-		for (int i = 0; i < m_numOfOffsprings; i++) {
-			cout << "- Offspring " << i + 1 << ": " << m_offsprings[i]->m_name << endl;
+		if (m_offsprings != nullptr) {
+			for (int i = 0; i < m_numOfOffsprings; i++) {
+				cout << "- Offspring " << i + 1 << ": " << m_offsprings[i]->m_name << endl;
+			}
 		}
 	}
 };
