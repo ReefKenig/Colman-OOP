@@ -47,6 +47,54 @@ public:
 			}
 		}
 	}
+
+	bool isPureVampire(Creature* offspring) {
+		if (typeid(*offspring) == typeid(Vampire)) { return true; }
+		return false;
+	}
+
+	bool isVampireLike(Creature* offspring) {
+		if (dynamic_cast<Vampire*>(offspring)) { return true; }
+		return false;
+	}
+
+	int pureVampireOffsprings() {
+		int count = 0;
+		if (m_offsprings) {
+			for (int i = 0; i < m_numOfOffsprings; i++) {
+				if (isPureVampire(m_offsprings[i])) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+	int vampireLikeOffsprings() {
+		int count = 0;
+		if (m_offsprings) {
+			for (int i = 0; i < m_numOfOffsprings; i++) {
+				if (isVampireLike(m_offsprings[i])) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+	int averageLightSensitivity() {
+		double sum = 0;
+		int vampireLikes = 0;
+		if (m_offsprings) {
+			for (int i = 0; i < m_numOfOffsprings; i++) {
+				if (isVampireLike(m_offsprings[i])) {
+					vampireLikes++;
+					sum += dynamic_cast<Vampire*>(m_offsprings[i])->getLightSensitivity();
+				}
+			}
+		}
+		return (int)(sum / vampireLikes);
+	}
 };
 
 #endif // !VAMPIRE_WEREWOLF_H

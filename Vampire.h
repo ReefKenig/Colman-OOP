@@ -35,6 +35,8 @@ public:
 	// 	delete[] m_offsprings;
 	// }
 
+	int getLightSensitivity() { return m_lightSensitivity; }
+
 	virtual void printSpecificInfo() override {
 		cout << "===Vampire printInfo===" << endl;
 		cout << "Light sensitivity: " << m_lightSensitivity << endl;
