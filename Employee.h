@@ -39,7 +39,7 @@ public:
 	}
 
 	// Save employee subclass
-	void saveTypes(ofstream& out) const {
+	void saveType(ofstream& out) const {
 		// Create type code (2 characters)
 		char type[2];
 		strncpy(type, typeid(*this).name() + 6, 2);
